@@ -34,3 +34,9 @@ body, html {
   display: none;
   background-color: red;
 }
+
+canvas {
+  display: block;
+  margin: auto;
+  background-color: black;
+}
