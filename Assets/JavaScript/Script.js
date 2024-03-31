@@ -113,13 +113,43 @@ async function CallSteamApi(name) {
 function displayGames (gameList) {
     var gameListHolder = document.querySelector ("#gameList") 
     console.log(gameListHolder) 
-    for (var i = 0;i<gameList.length; i++) {
-        var game = gameList[i]
+    for (var i = 0;i<gameList.length; i++) { 
+        let game = gameList[i]
         console.log(game)
         var gameHolder = document.createElement ("div")
         gameHolder.textContent = game.title
+        gameHolder.addEventListener ("click", function (){
+            addSavedGame(game.title)
+        })
         gameListHolder.append(gameHolder)
     }
 }
 
-CallSteamApi("Space Invaders");
+function loadSavedGames () {
+
+    var SavedGamesString = localStorage.getItem ("savedGames") 
+    var SavedGames = JSON.parse (SavedGamesString); 
+    console.log (SavedGames)
+    var SavedGamesListHolder = document.querySelector("#savedGameList")
+    SavedGamesListHolder.textContent = "saved Games"
+    for (var i = 0;i<SavedGames.length; i++) {
+        var gameName = SavedGames[i]
+        console.log (gameName)
+        var gameHolder = document.createElement ("div")
+        gameHolder.textContent = gameName 
+        SavedGamesListHolder.append(gameHolder)
+    }
+}
+
+CallSteamApi("New World");
+loadSavedGames ();
+
+function addSavedGame (gameName) {
+    var SavedGamesString = localStorage.getItem ("savedGames") 
+    var SavedGames = JSON.parse (SavedGamesString); 
+    if (!SavedGames) {
+        SavedGames = []
+    }
+    SavedGames.push(gameName) 
+    localStorage.setItem ("savedGames", JSON.stringify(SavedGames))
+}
