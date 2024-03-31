@@ -91,3 +91,27 @@ function drawEnemies() {
 }
 
 draw();
+async function CallSteamApi(name) {
+    const url = 'https://steam-game-search-and-details.p.rapidapi.com/game_search/search_like/title/?search_value='+ name ;
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '8c1ee96b34msh8023d55e76fd031p149f5bjsn9a07ea8e25bc',
+            'X-RapidAPI-Host': 'steam-game-search-and-details.p.rapidapi.com'
+        }
+    };
+
+    try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        displayGames (result) 
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+function displayGames (gameList) {
+
+    console.log(gameList) }
+
+CallSteamApi("Space Invaders");
