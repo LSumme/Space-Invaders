@@ -111,7 +111,15 @@ async function CallSteamApi(name) {
 }
 
 function displayGames (gameList) {
-
-    console.log(gameList) }
+    var gameListHolder = document.querySelector ("#gameList") 
+    console.log(gameListHolder) 
+    for (var i = 0;i<gameList.length; i++) {
+        var game = gameList[i]
+        console.log(game)
+        var gameHolder = document.createElement ("div")
+        gameHolder.textContent = game.title
+        gameListHolder.append(gameHolder)
+    }
+}
 
 CallSteamApi("Space Invaders");
